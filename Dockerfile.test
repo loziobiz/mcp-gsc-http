@@ -1,0 +1,31 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install minimal dependencies
+RUN pip install --no-cache-dir uvicorn starlette
+
+# Create a simple test server
+RUN echo 'from starlette.applications import Starlette\n\
+from starlette.responses import JSONResponse\n\
+from starlette.routing import Route\n\
+import uvicorn\n\
+\n\
+async def homepage(request):\n\
+    return JSONResponse({"status": "ok", "message": "Test server running"})\n\
+\n\
+app = Starlette(\n\
+    routes=[\n\
+        Route("/", homepage),\n\
+    ]\n\
+)\n\
+\n\
+if __name__ == "__main__":\n\
+    print("Starting test server on 0.0.0.0:8000")\n\
+    uvicorn.run(app, host="0.0.0.0", port=8000)' > test_server.py
+
+ENV PORT=8000
+EXPOSE 8000
+
+CMD ["python", "-u", "test_server.py"]
+

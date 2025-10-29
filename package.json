@@ -1,0 +1,20 @@
+{
+  "name": "mcp-gsc-cloudflare",
+  "version": "1.0.0",
+  "description": "Google Search Console MCP Server deployato su Cloudflare Containers",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "list": "npx @cloudflare/workers-containers list",
+    "images": "npx @cloudflare/workers-containers images list"
+  },
+  "dependencies": {
+    "@cloudflare/containers": "^0.0.19"
+  },
+  "devDependencies": {
+    "wrangler": "^4.45.2"
+  }
+}

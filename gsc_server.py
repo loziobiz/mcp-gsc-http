@@ -23,6 +23,8 @@ GSC_CREDENTIALS_PATH = os.environ.get("GSC_CREDENTIALS_PATH")
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 POSSIBLE_CREDENTIAL_PATHS = [
     GSC_CREDENTIALS_PATH,  # First try the environment variable if set
+    "/app/credentials.json",  # Path nel container Cloudflare
+    os.path.join(SCRIPT_DIR, "credentials.json"),  # Path locale
     os.path.join(SCRIPT_DIR, "service_account_credentials.json"),
     os.path.join(os.getcwd(), "service_account_credentials.json"),
     # Add any other potential paths here
@@ -1441,5 +1443,32 @@ Amin combines technical SEO knowledge with programming skills to create innovati
     return creator_info
 
 if __name__ == "__main__":
-    # Start the MCP server on stdio transport
-    mcp.run(transport="stdio")
+    # Start the MCP server on HTTP streamable transport
+    # Default port: 8000, può essere modificato tramite variabile d'ambiente GSC_PORT
+    import os
+    import contextlib
+    
+    # Configurazione porta e host per deployment personalizzato
+    port = int(os.environ.get("GSC_PORT", "8000"))
+    host = os.environ.get("GSC_HOST", "0.0.0.0")
+    
+    print(f"Starting MCP-GSC server on {host}:{port}")
+    print(f"Access the server at: http://{host}:{port}/mcp")
+    
+    # Per deployment personalizzato con uvicorn
+    import uvicorn
+    from starlette.applications import Starlette
+    from starlette.routing import Mount
+    
+    # Context manager per gestire il lifespan del session manager
+    # L'app MCP streamable http è già un'app ASGI completa
+    # Configura il path per montare l'app alla root /
+    # Questo fa sì che l'app MCP risponda a / invece di /mcp
+    mcp.settings.streamable_http_path = "/"
+    
+    # Usa direttamente l'app MCP senza wrapping in Starlette
+    # Il session manager viene avviato automaticamente
+    app = mcp.streamable_http_app()
+    
+    # Avvia con uvicorn
+    uvicorn.run(app, host=host, port=port, log_level="info")

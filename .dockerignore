@@ -1,0 +1,46 @@
+# Git
+.git
+.gitignore
+
+# Virtual environment
+.venv
+venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentazione
+*.md
+README.md
+CHANGELOG.md
+HTTP_SETUP_GUIDE.md
+CLIENT_EXAMPLES.md
+MIGRATION_SUMMARY.md
+QUICK_START.md
+
+# Scripts
+start_server.sh
+start_server.bat
+start_with_credentials.sh
+
+# Config files non necessari nel container
+wrangler.jsonc
+worker.js
+.dockerignore
+
+# Build artifacts
+*.log
+dist
+build
+

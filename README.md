@@ -54,6 +54,72 @@ Here's what you can ask Claude to do once you've set up this integration:
 
 ---
 
+## Transport Options
+
+Questo server MCP supporta due modalità di trasporto:
+
+### 1. **HTTP Streamable - Modalità Predefinita**
+
+Il server utilizza il **transport HTTP streamable** moderno di MCP, permettendo l'accesso remoto tramite HTTP. Questa è la configurazione ideale per:
+- Accesso remoto da client multipli
+- Deploy su server dedicati
+- Integrazione con sistemi distribuiti
+- Utilizzo dietro firewall/proxy
+
+**Come avviare il server HTTP:**
+
+```bash
+# Attiva il virtual environment
+source .venv/bin/activate  # Mac/Linux
+# o
+.venv\Scripts\activate  # Windows
+
+# Avvia il server
+python gsc_server.py
+```
+
+Il server sarà disponibile di default su `http://0.0.0.0:8000/mcp`
+
+**Configurazione tramite variabili d'ambiente:**
+
+```bash
+# Personalizza porta e host
+export GSC_PORT=3000
+export GSC_HOST=127.0.0.1
+
+python gsc_server.py
+```
+
+**Per connettere un client MCP al server HTTP:**
+
+Aggiungi questa configurazione al tuo client MCP:
+
+```json
+{
+  "mcpServers": {
+    "gscServer": {
+      "url": "http://your-server-ip:8000/mcp"
+    }
+  }
+}
+```
+
+### 2. **STDIO - Modalità Locale (Opzionale)**
+
+Se preferisci utilizzare il trasporto stdio tradizionale per l'uso locale con Claude Desktop, puoi modificare l'ultima riga di `gsc_server.py`:
+
+```python
+# Cambia da:
+mcp.run(transport="streamable-http", port=port, host=host)
+
+# A:
+mcp.run(transport="stdio")
+```
+
+Quindi configura Claude Desktop come descritto nella sezione 5 sotto.
+
+---
+
 ## Getting Started (No Coding Experience Required!)
 
 ### 1. Set Up Google Search Console API Access

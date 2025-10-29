@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "gsc-http-cloudflare": {
+      "url": "https://mcp-gsc-server.kf-api.workers.dev/mcp",
+      "transport": "streamable-http"
+    }
+  }
+}

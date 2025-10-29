@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "gsc-http": {
+      "url": "http://localhost:8000/mcp",
+      "transport": "streamable-http",
+      "description": "Google Search Console MCP Server (HTTP - con Service Account)"
+    }
+  }
+}

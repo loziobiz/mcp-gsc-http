@@ -1,0 +1,31 @@
+{
+  "name": "mcp-gsc-server",
+  "main": "worker.js",
+  "compatibility_date": "2025-01-01",
+  "account_id": "9e9075cd7b5eb4225c70717081508ffd",
+  "containers": [
+    {
+      "class_name": "McpGscContainer",
+      "image": "./Dockerfile",
+      "max_instances": 1
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "class_name": "McpGscContainer",
+        "name": "MCP_GSC"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["McpGscContainer"]
+    }
+  ],
+  "vars": {
+    "ENVIRONMENT": "production"
+  }
+}
+
