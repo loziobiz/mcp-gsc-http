@@ -2,6 +2,16 @@
 
 A tool that connects [Google Search Console](https://search.google.com/search-console/about) (GSC) with Claude AI, allowing you to analyze your SEO data through natural language conversations. This integration gives you access to property information, search analytics, URL inspection, and sitemap management—all through simple chat with Claude.
 
+## 📚 Documentazione Completa
+
+Per la documentazione dettagliata, consulta la cartella **[docs/](./docs/)**:
+
+- **[Guida Migrazione Completa](./docs/GUIDA_MIGRAZIONE_COMPLETA.md)** - Per migrare un altro server MCP
+- **[Deployment su Cloudflare](./docs/CLOUDFLARE_DEPLOYMENT.md)** - Guida deployment dettagliata
+- **[Quick Start](./docs/QUICK_START.md)** - Avvio rapido in locale
+- **[Configurazione Client](./docs/CLIENT_EXAMPLES.md)** - Esempi configurazione client MCP
+- **[Indice Completo](./docs/README.md)** - Indice di tutta la documentazione
+
 ---
 
 ## What Can This Tool Do For SEO Professionals?
